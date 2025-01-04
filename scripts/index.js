@@ -19,12 +19,12 @@ function createCard(card, deleteCard) {
     });
 
     return cardElement;
-}
+};
 
 // @todo: Функция удаления карточки
 function removeCard(cardElement) {
     cardElement.remove();
-}
+};
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach(card => {
