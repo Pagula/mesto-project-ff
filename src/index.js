@@ -1,3 +1,7 @@
+import './pages/index.css';
+
+
+
 // @todo: Темплейт карточки
 const placesList = document.querySelector('.places__list');
 const cardTemplate = document.querySelector('#card-template').content;
@@ -10,8 +14,8 @@ function createCard(card, deleteCard) {
     const title = cardElement.querySelector('.card__title');
     const deleteButton = cardElement.querySelector('.card__delete-button');
 
-    image.src = card.link; 
-    image.alt = card.name; 
+    image.src = card.link;
+    image.alt = card.name;
     title.textContent = card.name;
 
     deleteButton.addEventListener('click', () => {

@@ -1,1 +1,1 @@
-(()=>{var n=[2,3,5].map((function(n){return 2*n}));console.log(n)})();
+(()=>{"use strict";var e=document.querySelector(".places__list"),t=document.querySelector("#card-template").content;function r(e){e.remove()}initialCards.forEach((function(c){var n=function(e,r){var c=t.querySelector(".places__item").cloneNode(!0),n=c.querySelector(".card__image"),a=c.querySelector(".card__title"),o=c.querySelector(".card__delete-button");return n.src=e.link,n.alt=e.name,a.textContent=e.name,o.addEventListener("click",(function(){r(c)})),c}(c,r);e.append(n)}))})();
