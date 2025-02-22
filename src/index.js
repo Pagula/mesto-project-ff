@@ -1,3 +1,4 @@
+import {initialCards} from '../src/scripts/cards';
 import './pages/index.css';
 
 
@@ -35,3 +36,6 @@ initialCards.forEach(card => {
     const cards = createCard(card, removeCard);
     placesList.append(cards);
 });
+
+
+
