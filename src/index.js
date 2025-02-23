@@ -1,41 +1,50 @@
 import {initialCards} from '../src/scripts/cards';
+import { createCard, removeCard, addUserCard} from './components/card';
 import './pages/index.css';
+import { openModal, closeModal } from './components/modal';
 
-
-
-// @todo: Темплейт карточки
 const placesList = document.querySelector('.places__list');
-const cardTemplate = document.querySelector('#card-template').content;
-
-// @todo: DOM узлы
-// @todo: Функция создания карточки
-function createCard(card, deleteCard) {
-    const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
-    const image = cardElement.querySelector('.card__image');
-    const title = cardElement.querySelector('.card__title');
-    const deleteButton = cardElement.querySelector('.card__delete-button');
-
-    image.src = card.link;
-    image.alt = card.name;
-    title.textContent = card.name;
-
-    deleteButton.addEventListener('click', () => {
-        deleteCard(cardElement);
-    });
-
-    return cardElement;
-};
-
-// @todo: Функция удаления карточки
-function removeCard(cardElement) {
-    cardElement.remove();
-};
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach(card => {
     const cards = createCard(card, removeCard);
     placesList.append(cards);
 });
+
+// 6 Sprint
+
+const popupTypeEdit = document.querySelector('.popup_type_edit');
+const popupTypeNewCard = document.querySelector('.popup_type_new-card');
+const popupTypeImage = document.querySelector('.popup_type_image');
+const profileName = document.querySelector('.profile__title');
+const profileAbout = document.querySelector('.profile__description');
+const buttonEdit = document.querySelector('.profile__edit-button');
+const buttonAdd = document.querySelector('.profile__add-button');
+
+
+buttonEdit.addEventListener('click', () => {
+  openModal(popupTypeEdit);
+});
+buttonAdd.addEventListener('click', () => {
+  openModal(popupTypeNewCard);
+});
+
+const allPopups = document.querySelectorAll('.popup');
+
+// Обработчик оверлея и крестика
+allPopups.forEach( function (popup) {
+    popup.addEventListener('mousedown', function (evt) {
+        if (evt.target.classList.contains('popup_is-opened')) {
+            closeModal(popup);
+        };
+        if (evt.target.classList.contains('popup__close')) {
+            closeModal(popup);
+        };
+    });
+});
+
+
+resetProfileForm()
 
 
 
