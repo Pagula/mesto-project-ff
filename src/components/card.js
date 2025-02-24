@@ -1,15 +1,15 @@
-import { closeModal } from "./modal";
-
-export function createCard(card, deleteCard) {
+function createCard(card, deleteCard, onImageClick) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
-  const image = cardElement.querySelector('.card__image');
-  const title = cardElement.querySelector('.card__title');
-  const deleteButton = cardElement.querySelector('.card__delete-button');
+  const cardImage = cardElement.querySelector('.card__image');
 
-  image.src = card.link;
-  image.alt = card.name;
-  title.textContent = card.name;
+  cardImage.src = card.link;
+  cardImage.alt = card.name;
+  cardElement.querySelector('.card__title').textContent = card.name;
+
+  cardImage.addEventListener('click', () => onImageClick(card.name, card.link));
+
+  const deleteButton = cardElement.querySelector('.card__delete-button');
 
   deleteButton.addEventListener('click', () => {
       deleteCard(cardElement);
@@ -19,15 +19,9 @@ export function createCard(card, deleteCard) {
 };
 
 // @todo: Функция удаления карточки
-export function removeCard(cardElement) {
+function removeCard(cardElement) {
   cardElement.remove();
 };
 
-export function addUserCard (evt) {
-  evt.preventDefault();
-  const placeName = document.forms.newPlace.placeName;
-  const placeLink = document.forms.newPlace.Link;
-  placeList.prepend(createCard(placeLink.value, placeName.value, removeCard));
-  placeForm.reset();
-  closeModal();
-}
+
+export { createCard, removeCard }
