@@ -1,4 +1,4 @@
-function createCard(card, deleteCard, onImageClick, likedCard) {
+function createCard(card, deleteCard, onImageClick, likeCard) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
@@ -16,7 +16,7 @@ function createCard(card, deleteCard, onImageClick, likedCard) {
   cardElement.querySelector('.card__title').textContent = card.name;
 
   likeButton.addEventListener('click', () => {
-    likedCard(likeButton);
+    likeCard(likeButton);
   });
 
   deleteButton.addEventListener('click', () => {
@@ -27,7 +27,7 @@ function createCard(card, deleteCard, onImageClick, likedCard) {
 };
 
 // Функция лайка карточки
-function likedCard(likeButton) {
+function likeCard(likeButton) {
   likeButton.classList.toggle('card__like-button_is-active');
 };
 
@@ -36,4 +36,4 @@ function removeCard(cardElement) {
   cardElement.remove();
 };
 
-export { createCard, removeCard, likedCard }
+export { createCard, removeCard, likeCard }

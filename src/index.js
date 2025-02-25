@@ -1,5 +1,5 @@
 import { initialCards } from '../src/scripts/cards';
-import { createCard, removeCard, likedCard } from './components/card';
+import { createCard, removeCard, likeCard } from './components/card';
 import './pages/index.css';
 import { openModal, closeModal } from './components/modal';
 
@@ -11,6 +11,8 @@ const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
 
 buttonEdit.addEventListener('click', () => {
+  editName.value = profileName.textContent;
+  editDescription.value = profileDescription.textContent;
   openModal(popupTypeEdit);
 });
 buttonAdd.addEventListener('click', () => {
@@ -44,34 +46,28 @@ const openCardClick = ({ cardLink, cardName }) => {
 
 // Вывести карточки на страницу
 initialCards.forEach(card => {
-  const cards = createCard(card, removeCard, openCardClick, likedCard, addUserCard);
+  const cards = createCard(card, removeCard, openCardClick, likeCard, addUserCard);
   placesList.append(cards);
 });
 
 // Редактирование профиля
 const profileForm = document.forms['edit-profile'];
 const editName = profileForm['name'];
-const editAbout = profileForm['description'];
+const editDescription = profileForm['description'];
 const profileName = document.querySelector('.profile__title');
-const profileAbout = document.querySelector('.profile__description');
-
-function editPopup() {
-  editName.value = profileName.textContent;
-  editAbout.value = profileAbout.textContent;
-  openModal(popupTypeEdit);
-};
+const profileDescription = document.querySelector('.profile__description');
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
   const nameValue = editName.value;
-  const aboutValue = editAbout.value;
+  const aboutValue = editDescription.value;
   profileName.textContent = nameValue;
-  profileAbout.textContent = aboutValue;
+  profileDescription.textContent = aboutValue;
 
   closeModal(popupTypeEdit);
 };
 
-profileForm.addEventListener('submit', handleFormSubmit, editPopup);
+profileForm.addEventListener('submit', handleFormSubmit);
 
 // Добавление карточки пользователем
 const placeForm = document.forms['new-place'];
@@ -85,7 +81,7 @@ function addUserCard(evt) {
     link: placeLink.value
   };
 
-  placesList.prepend(createCard(newCard, removeCard, openCardClick, likedCard));
+  placesList.prepend(createCard(newCard, removeCard, openCardClick, likeCard));
   placeForm.reset();
   closeModal(popupTypeNewCard);
 };
