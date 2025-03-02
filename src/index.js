@@ -2,6 +2,7 @@ import { initialCards } from '../src/scripts/cards';
 import { createCard, removeCard, likeCard } from './components/card';
 import './pages/index.css';
 import { openModal, closeModal } from './components/modal';
+import { enableValidation, clearValidation } from './components/validation';
 
 const placesList = document.querySelector('.places__list');
 
@@ -9,6 +10,29 @@ const popupTypeEdit = document.querySelector('.popup_type_edit');
 const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
+
+const allPopups = document.querySelectorAll('.popup');
+const popupTypeImage = document.querySelector('.popup_type_image');
+const popupImage = document.querySelector('.popup__image');
+const popupImageCaption = document.querySelector('.popup__caption');
+
+const profileForm = document.forms['edit-profile'];
+const editName = profileForm['name'];
+const editDescription = profileForm['description'];
+const profileName = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+const placeForm = document.forms['new-place'];
+const placeName = placeForm['place-name'];
+const placeLink = placeForm['link'];
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button_disabled',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
 buttonEdit.addEventListener('click', () => {
   editName.value = profileName.textContent;
@@ -20,7 +44,6 @@ buttonAdd.addEventListener('click', () => {
 });
 
 // Обработчик оверлея и крестика
-const allPopups = document.querySelectorAll('.popup');
 
 allPopups.forEach(function (popup) {
   popup.addEventListener('mousedown', function (evt) {
@@ -35,9 +58,6 @@ allPopups.forEach(function (popup) {
 
 // Открытие картинки
 const openCardClick = ({ cardLink, cardName }) => {
-  const popupTypeImage = document.querySelector('.popup_type_image');
-  const popupImage = document.querySelector('.popup__image');
-  const popupImageCaption = document.querySelector('.popup__caption');
   popupImageCaption.textContent = cardName;
   popupImage.alt = cardName;
   popupImage.src = cardLink;
@@ -51,13 +71,7 @@ initialCards.forEach(card => {
 });
 
 // Редактирование профиля
-const profileForm = document.forms['edit-profile'];
-const editName = profileForm['name'];
-const editDescription = profileForm['description'];
-const profileName = document.querySelector('.profile__title');
-const profileDescription = document.querySelector('.profile__description');
-
-function handleFormSubmit(evt) {
+function editProfileFormSubmit(evt) {
   evt.preventDefault();
   const nameValue = editName.value;
   const aboutValue = editDescription.value;
@@ -67,13 +81,9 @@ function handleFormSubmit(evt) {
   closeModal(popupTypeEdit);
 };
 
-profileForm.addEventListener('submit', handleFormSubmit);
+profileForm.addEventListener('submit', editProfileFormSubmit);
 
 // Добавление карточки пользователем
-const placeForm = document.forms['new-place'];
-const placeName = placeForm['place-name'];
-const placeLink = placeForm['link'];
-
 function addUserCard(evt) {
   evt.preventDefault();
   const newCard = {
@@ -91,3 +101,4 @@ placeForm.addEventListener('submit', addUserCard);
 
 
 
+enableValidation(validationConfig);
