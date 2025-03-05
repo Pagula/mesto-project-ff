@@ -10,6 +10,14 @@ const closeModal = (popup) => {
   document.removeEventListener("keydown", handleDocumentKeydown);
 }
 
+const handleModalClick = (evt) => {
+  if (evt.target.classList.contains('popup_is-opened')) {
+    return closeModal(evt.target);
+    }
+  if (evt.target.classList.contains('popup__close')) {
+    closeModal(evt.target.closest('.popup'));
+  }
+};
 
 // Закрытие попапа по клавише Esc
 const handleDocumentKeydown = (evt) => {
@@ -17,4 +25,4 @@ const handleDocumentKeydown = (evt) => {
     closeModal(document.querySelector(".popup_is-opened"));
   }
 }
-export { openModal, closeModal };
+export { openModal, closeModal, handleModalClick };

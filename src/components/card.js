@@ -23,9 +23,9 @@ const createCard = ({
 
   const counter = element.querySelector('.card__like-counter');
 
-  if (data.likes.lenght) {
+  if (data.likes.length) {
     counter.classList.add('card__like-counter_is-active');
-    counter.textContent = data.likes.lenght;
+    counter.textContent = data.likes.length;
   }
 
   const deleteButton = element.querySelector('.card__delete-button');
@@ -41,7 +41,7 @@ const createCard = ({
     });
   }
 
-  const likeButton = cardElement.querySelector('.card__like-button');
+  const likeButton = element.querySelector('.card__like-button');
 
   if (data.likes.find((element) => element['_id'] === currentUserId)) {
     likeButton.classList.add('card__like-button_is-active');
@@ -58,4 +58,4 @@ const createCard = ({
   return element;
 };
 
-export { createCard }
+export { createCard };
