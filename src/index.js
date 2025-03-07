@@ -66,10 +66,6 @@ const setProfile = ({ name, description, avatar }) => {
 };
 
 const renderLoading = ({ buttonElement, isLoading }) => {
-  if (!buttonElement) {
-    console.error('Элемент кнопки не найден!');
-    return;
-  }
   if (isLoading) {
     buttonElement.textContent = 'Сохранение...';
   } else {

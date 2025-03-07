@@ -32,6 +32,7 @@ const createCard = ({
 
   if (data.owner['_id'] === currentUserId) {
     deleteButton.classList.add('card__delete-button_is-active');
+    deleteButton.style.display = 'block';
     deleteButton.addEventListener('click', () => {
       deleteCard({
         cardId: data['_id'],
