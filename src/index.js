@@ -86,7 +86,7 @@ const handleCardLike = ({ cardId, buttonElement, counterElement }) => {
           counterElement.textContent = likes.length;
         } else {
           counterElement.classList.remove('card__like-counter_is-active');
-          counterElement.textContent = '';
+          counterElement.textContent = '0';
         }
       })
       .catch((error) => console.error(error))
